@@ -1,0 +1,4 @@
+KC754958.1
+KC754958|culex_perfuscus|cen|1969
+OZ308592|homo_sapiens|nld|2018
+OZ308592

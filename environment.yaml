@@ -1,0 +1,18 @@
+name: usuv_env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - ncbi-datasets-cli
+  - seqkit>=2.4.0
+  - mafft
+  - iqtree3
+  - treetime
+
+  # Optional: For visual check of the tree in terminal
+  - gotree

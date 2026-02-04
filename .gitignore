@@ -1,0 +1,9 @@
+# Folders
+usuv_data/
+backup_scripts/
+
+# Files
+api.env
+.DS_Store
+*.zip
+*.log
