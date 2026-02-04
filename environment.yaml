@@ -11,7 +11,7 @@ dependencies:
   - ncbi-datasets-cli
   - seqkit>=2.4.0
   - mafft
-  - iqtree3
+  - iqtree
   - treetime
 
   # Optional: For visual check of the tree in terminal
