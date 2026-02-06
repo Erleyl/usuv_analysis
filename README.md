@@ -1,7 +1,7 @@
 # USUV Analysis
 
 ## Description
-Data analysis of USUV sequences. Intended to generated ML phyolgenetic trees for recurrent data overviews and reports. 
+Data analysis of USUV sequences. Intended to generated ML phylogenetic trees for recurrent data overviews and reports. 
 
 ## Overview
 This repository contains scripts and tools for analyzing Usutu virus (USUV) sequences. USUV is an arthropod-borne virus that belongs to the genus Flavivirus. This project focuses on sequence database curation, metadata curation and analysis.
