@@ -96,7 +96,7 @@ if jsonl_path.exists():
             country_name = geo_raw.split(":")[0].strip() if ":" in geo_raw else geo_raw
             country3 = ISO_MAP.get(country_name, country_name[:3].lower())
             host_clean = re.sub(r'[^a-z0-9_]', '', host_raw.lower().replace(" ", "_"))
-            taxa_name = f"{acc_base}|{host_clean}|{country3}|{coll_date}"
+            taxa_name = f"{acc_base}.{host_clean}.{country3}.{coll_date}"
             
             meta_dict[acc_base] = {
                 "taxa_name": taxa_name, "accession": acc_full, "completeness": rec.get("completeness", "unknown"),

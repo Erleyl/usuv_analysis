@@ -2,17 +2,17 @@ name: usuv_env
 channels:
   - bioconda
   - conda-forge
-  - defaults
+  #- defaults
 dependencies:
   - python=3.10
   - pip
-  - numpy
+  #- numpy
   - pandas
   - ncbi-datasets-cli
   - seqkit>=2.4.0
   - mafft
   - iqtree
-  - treetime
+  #- treetime sometimes causes issues when trying to install MacOS native
 
   # Optional: For visual check of the tree in terminal
   - gotree
