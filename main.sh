@@ -38,7 +38,7 @@ usage() {
     echo "  --time     TIME: TreeTime Molecular Clock Analysis."
     echo "  --all      FULL RUN: Executes all steps sequentially."
     echo "========================================================="
-    exit 1
+    exit 0
 }
 
 [ $# -eq 0 ] && usage
