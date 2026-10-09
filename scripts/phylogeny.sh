@@ -7,4 +7,5 @@ INPUT="$BASE_DIR/results/$STAMP/USUV_Aligned_$STAMP.fasta"
 PRE="$BASE_DIR/results/$STAMP/USUV_IQTree_$STAMP"
 
 echo "[TREE] Running IQ-TREE (MFP + 1000 Bootstraps)..."
-iqtree -s "$INPUT" -m MFP -bb 1000 -alrt 1000 -nt AUTO -pre "$PRE"
+REDO=""; [[ "${FORCE:-0}" == "1" ]] && REDO="-redo"
+iqtree -s "$INPUT" -m MFP -bb 1000 -alrt 1000 -nt AUTO -pre "$PRE" $REDO

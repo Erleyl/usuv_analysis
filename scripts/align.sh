@@ -7,4 +7,5 @@ INPUT="$BASE_DIR/results/$STAMP/USUV_QC_Passed_$STAMP.fasta"
 OUTPUT="$BASE_DIR/results/$STAMP/USUV_Aligned_$STAMP.fasta"
 
 echo "[ALIGN] Running MAFFT..."
-mafft --auto --thread 6 --reorder "$INPUT" > "$OUTPUT"
+#mafft --auto --thread 16 --reorder "$INPUT" > "$OUTPUT"
+mafft --thread 16 --reorder --retree 2 --inputorder "$INPUT" > "$OUTPUT"

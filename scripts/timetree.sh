@@ -11,6 +11,10 @@ BASE_DIR="$PROJECT_ROOT/usuv_data"
 RESULTS_DIR="$BASE_DIR/results/$STAMP"
 # We now use the Master Metadata that was updated in the fetch step
 METADATA="$BASE_DIR/curated/usuv_master_metadata.csv"
+# Prefer the dated merged metadata (includes lab samples); fall back to master
+for cand in "$BASE_DIR/curated/$STAMP/USUV_Merged_${STAMP}_metadata.csv" "$BASE_DIR/curated/USUV_Merged_${STAMP}_metadata.csv"; do
+    if [[ -f "$cand" ]]; then METADATA="$cand"; break; fi
+done
 
 log() { echo "$(date +"[%Y-%m-%d %H:%M:%S]") [TIMETREE] $*" | tee -a "$BASE_DIR/usuv_pipeline_$STAMP.log"; }
 
@@ -37,12 +41,29 @@ fi
 log "Sanitizing metadata carriage returns..."
 perl -i -pe 's/\r//g' "$METADATA"
 
+# TreeTime splits quoted fields containing commas (e.g. "Ducks, geese and swans"),
+# shifting columns. Give it a minimal 2-column dates file; unknown dates -> blank.
+DATES_FILE="$RESULTS_DIR/USUV_dates_$STAMP.csv"
+mkdir -p "$RESULTS_DIR"
+python3 - "$METADATA" "$DATES_FILE" <<'PY'
+import csv, sys
+with open(sys.argv[1], newline="", encoding="utf-8") as fh:
+    rows = list(csv.DictReader(fh))
+with open(sys.argv[2], "w", newline="", encoding="utf-8") as fh:
+    w = csv.writer(fh)
+    w.writerow(["taxa_name", "collection_date"])
+    for r in rows:
+        d = (r.get("collection_date") or "").strip()
+        # "unknown" and NCBI date ranges such as "[2015 TO 2019]" are not dates TreeTime can read -> blank
+        w.writerow([r.get("taxa_name", ""), "" if (d.lower() in ("unknown", "nan") or d.startswith("[")) else d])
+PY
+
 # 5. Run TreeTime
 
 log "Estimating molecular clock with TreeTime..."
 treetime --aln "$ALIGNED_FASTA" \
          --tree "$ML_TREE" \
-         --dates "$METADATA" \
+         --dates "$DATES_FILE" \
          --name-column "taxa_name" \
          --date-column "collection_date" \
          --outdir "$TIMETREE_OUT" \

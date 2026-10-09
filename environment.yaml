@@ -14,5 +14,11 @@ dependencies:
   - iqtree
   #- treetime sometimes causes issues when trying to install MacOS native
 
+  # R is needed for `main.sh --lab` (scripts/prepare_lab_fasta.R)
+  - r-base
+  - r-dplyr
+  - r-stringr
+
   # Optional: For visual check of the tree in terminal
   - gotree
+  - ape

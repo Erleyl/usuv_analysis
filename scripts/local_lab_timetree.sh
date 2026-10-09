@@ -72,7 +72,7 @@ with open(meta_path, newline="", encoding="utf-8") as fh:
 n_unknown = 0
 for row in rows:
     val = (row.get("collection_date") or "").strip()
-    if val.lower() in ("unknown", "nan", ""):
+    if val.lower() in ("unknown", "nan", "") or val.startswith("["):   # "[2015 TO 2019]" ranges: not readable by TreeTime
         row["collection_date"] = ""
         n_unknown += 1
 

@@ -1,9 +1,24 @@
 # Folders
 usuv_data/
-backup_scripts/
+scripts/backup_scripts/
+scripts/asfv_data
+scripts/old_scripts/
+example_ncbi_compatible_output.fasta
+results/
+scripts/merge_lab_enhanced.sh
+scripts/emma/
+usuv_data/local_lab/
+test_metadata.csv
+check_metadata_v2.py
+check_metadata_v3.py
+check_metadata.py
+compare_lab_data.py
 
 # Files
 api.env
 .DS_Store
 *.zip
 *.log
+reference_lineages.tsv
+exclude_seqs.txt
+curation.log

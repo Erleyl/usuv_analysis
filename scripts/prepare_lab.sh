@@ -10,7 +10,8 @@
 #                  usuv_data/local_lab/internal_metadata.csv
 #              merge_lab.sh then builds the NCBI-style names (SeqID.host.country.year)
 #              and renames the FASTA headers itself, as in earlier runs.
-#              NOT used on purpose: usuv_data/lab_*_curated.* (from curate_lab_data.sh).
+#              NOT used on purpose: usuv_data/lab_*_curated.* (made by the old
+#              curate_lab_data.sh, now in scripts/old_scripts/).
 #              merge_lab.sh prefers those files and in that mode expects FASTA headers
 #              that are already NCBI-style names, which this step does not produce.
 #              The full set of outputs (incl. the "_all" export and the selection
