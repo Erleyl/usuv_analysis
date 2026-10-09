@@ -1,0 +1,17 @@
+
+
+
+
+
+
+
+KC754958 Africa 1 1969 Central African Republic not there
+AY453412 Africa 2 2001 South Africa 
+KC754955 Africa 3 1981 Central African Republic not there
+KY294723 Africa 3.1 2016 Germany
+MN122145 Africa 3.2 2016 Gennep
+MN122146 Africa 3.3 2016 Andelst
+AY453411 Europe 1 2001 Vienna not there
+KU573072 Europe 2 2013 Italy
+MN122152 Europe 3 2016 Zevenaar
+MG461312 Europe 5 2004 Israel
