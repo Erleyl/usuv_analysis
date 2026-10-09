@@ -148,11 +148,14 @@ It writes `usuv_data/results/<date>/USUV_tip_labels_<date>.tsv`, one row per seq
 | :--- | :--- |
 | `taxa_name` | first column, equal to the tip names of the trees |
 | `accession`, `data_source`, `host`, `collection_date`, `geo_location` | as in the merged metadata |
-| `source`, `country`, `location`, `year` | cleaned values, handy for colouring tips (`location` = detail below the country, `unknown` if none) |
+| `source`, `project`, `public`, `lab_id` | whom the sample belongs to: `source` = `EMC_lab`, `RIVM` or `NCBI` (not in our sheets), `project` = Project of the sheet (`DeadWildBirds`, `TidalParks`, `rivm`, ...; `NCBI` for other public sequences), `lab_id` = our own ID. Lab/partner samples that are already public on NCBI keep their source, project and `lab_id`; `public` = `yes` if the sequence is on NCBI, `no` if it is only in our lab data |
+| `country`, `location`, `year` | cleaned values, handy for colouring tips (`location` = detail below the country, `unknown` if none) |
 | `label_acc_country_year`, `label_acc_country_host_year`, `label_acc_country_date`, `label_acc_host_country3_year`, `label_source_acc_country_year` (+ `label_custom`) | ready-made tip labels in several styles |
 
+Which sequences belong to the lab or to a partner is taken from the selection audit of `--lab` (`usuv_data/lab_sequences/USUV_lab_<date>_selection_audit.tsv`): the accession in the sheet's `GenBank` column, or an NCBI record with the same ID as the lab sample. Run `--lab` before `--labels`; without that audit the lab's public sequences show as `NCBI`.
+
 Load the TSV as annotations in PearTree (the first column is matched with the tip names), then choose a
-`label_*` column for the tip text and, for example, `country`, `location`, `year`, `source` or `host`
+`label_*` column for the tip text and, for example, `project`, `source`, `public`, `country`, `location`, `year` or `host`
 for colours. Labels are unique and contain only letters, digits and `. _ -`.
 
 The script can also be used directly (`scripts/make_tip_labels.py`, same modelling as the WNV script

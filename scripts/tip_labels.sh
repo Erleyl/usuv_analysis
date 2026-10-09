@@ -5,7 +5,7 @@
 #              FigTree / ggtree) as annotations:
 #                  usuv_data/results/<RUN_DATE>/USUV_tip_labels_<RUN_DATE>.tsv
 #              The first column is taxa_name (= the tip names of the trees), followed by
-#              host, date, country, location, year, source and one label_<style> column per label
+#              host, date, source, project, public, lab_id, country, location, year and one label_<style> column per label
 #              style. The trees and FASTA files are NOT changed.
 #              Only the merged metadata is needed. main.sh runs this step automatically at the
 #              end of --merge (and --all); run --labels to remake it, e.g. with LABEL_TEMPLATE.
@@ -36,6 +36,18 @@ META="$BASE_DIR/curated/$STAMP/USUV_Merged_${STAMP}_metadata.csv"
 [[ -f "$META" ]] || fail "Merged metadata for $STAMP not found. Run --merge first (or set RUN_DATE)."
 
 ARGS=(--metadata "$META" --out "$OUT")
+
+# Selection audit of the --lab step: tells which NCBI sequences belong to the lab / partners
+AUDIT="$BASE_DIR/lab_sequences/USUV_lab_${STAMP}_selection_audit.tsv"
+if [[ ! -f "$AUDIT" ]]; then
+    AUDIT="$(ls -1 "$BASE_DIR"/lab_sequences/USUV_lab_*_selection_audit.tsv 2>/dev/null | sort | tail -n 1 || true)"
+    [[ -n "$AUDIT" ]] && log "Note: no lab audit for $STAMP (run --lab); using $(basename "$AUDIT")."
+fi
+if [[ -n "$AUDIT" && -f "$AUDIT" ]]; then
+    ARGS+=(--lab-audit "$AUDIT")
+else
+    log "WARNING: no lab selection audit found (run --lab): public sequences of the lab will show as NCBI."
+fi
 [[ -n "${LABEL_TEMPLATE:-}" ]]   && ARGS+=(--template "$LABEL_TEMPLATE")
 [[ "${LABEL_LOWER:-0}" == "1" ]] && ARGS+=(--lower)
 
